@@ -12,6 +12,7 @@ import { CategoriaService } from '../services/domain/categoria.service';
 import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
+import { AuthIterceptorProvider } from '../interceptors/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -29,12 +30,14 @@ import { UsuarioService } from '../services/domain/usuario.service';
   providers: [
     StatusBar,
     SplashScreen,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,
+    AuthIterceptorProvider,
     ErrorIterceptorProvider,
     AuthService,
     StorageService,
-    UsuarioService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    UsuarioService
+    
   ]
 })
 export class AppModule {}
