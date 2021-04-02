@@ -14,6 +14,7 @@ import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthIterceptorProvider } from '../interceptors/auth-interceptor';
 import { ConjuntoService } from '../services/domain/conjunto.service';
+import { ComponenteService } from '../services/domain/componente.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ConjuntoService } from '../services/domain/conjunto.service';
     AuthService,
     StorageService,
     UsuarioService,
-    ConjuntoService
+    ConjuntoService,
+    ComponenteService
     
   ]
 })

@@ -8,7 +8,7 @@
 </ion-header>
 <ion-content padding>
   <ion-list inset>
-    <button ion-item *ngFor="let item of items">
+    <button ion-item *ngFor= "let item of items" (click)="showComponentes(item.id)">
       <h2>{{item.descricao}}</h2>
     </button> 
   </ion-list>

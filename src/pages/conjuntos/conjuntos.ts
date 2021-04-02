@@ -27,4 +27,8 @@ export class ConjuntosPage {
       error =>{});
   }
 
+  showComponentes (conjunto_id: string) {
+    this.navCtrl.push('ComponentesPage', {conjunto: conjunto_id});
+  }
+
 }

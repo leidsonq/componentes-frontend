@@ -1,0 +1,21 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Componentes</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+   <button ion-item *ngFor="let item of items">
+     <ion-thumbnail item-start>
+       <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
+     </ion-thumbnail>
+
+     <h2>{{item.codigoD}}</h2>
+     <p style="font-size: 10px">{{item.descricao}}</p>
+
+   </button>
+  </ion-list>
+
+</ion-content>
