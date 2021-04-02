@@ -27,7 +27,9 @@ export class CategoriasPage {
 
     },
     error => {});
-    console.log();
   }
 
+  showConjuntos (modelo_id: string) {
+    this.navCtrl.push('ConjuntosPage', {modelo: modelo_id});
+  }
 }

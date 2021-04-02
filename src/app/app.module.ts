@@ -13,6 +13,7 @@ import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 import { UsuarioService } from '../services/domain/usuario.service';
 import { AuthIterceptorProvider } from '../interceptors/auth-interceptor';
+import { ConjuntoService } from '../services/domain/conjunto.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AuthIterceptorProvider } from '../interceptors/auth-interceptor';
     ErrorIterceptorProvider,
     AuthService,
     StorageService,
-    UsuarioService
+    UsuarioService,
+    ConjuntoService
     
   ]
 })

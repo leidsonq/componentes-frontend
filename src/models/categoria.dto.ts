@@ -1,4 +1,5 @@
 export interface CategoriaDTO {
     id: string;
-    descricao: string;
+    fabricante: string;
+    modelo: string;
 }

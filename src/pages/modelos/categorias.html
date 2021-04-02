@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle> 
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Modelos de Máquinas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor= "let item of items" (click)="showConjuntos(item.id)">
+
+      <ion-card>
+        <img src="assets/imgs/mci28.1.png"/>
+        <ion-card-content>
+          <ion-card-title>
+            <h2 text-center>{{item.fabricante}} {{item.modelo}}</h2>
+            </ion-card-title>
+        </ion-card-content>
+      </ion-card>
+
+    </button>
+  </ion-list> 
+
+</ion-content>
