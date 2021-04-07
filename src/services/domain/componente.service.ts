@@ -14,4 +14,8 @@ export class ComponenteService{
             return this.http.get(`${API_CONFIG.baseUrl}/conjuntos/${conjunto_id}`);
     }
 
+    findBySubConjunto(subconjunto_id: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/subconjuntos/${subconjunto_id}`);
+    }
+
 }

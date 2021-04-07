@@ -6,14 +6,12 @@ import { ComponenteService } from '../../services/domain/componente.service';
 
 @IonicPage()
 @Component({
-  selector: 'page-componentes',
-  templateUrl: 'componentes.html',
+  selector: 'page-subcomponentes',
+  templateUrl: 'subcomponentes.html',
 })
-export class ComponentesPage {
+export class SubcomponentesPage {
 
   items: ComponenteDTO[];
-  items2: ComponenteDTO[];
-
 
   constructor(
     public navCtrl: NavController, 
@@ -22,17 +20,12 @@ export class ComponentesPage {
   }
 
   ionViewDidLoad() {
-    let conjunto_id = this.navParams.get('conjunto');
-    this.componenteService.findByConjunto (conjunto_id)
+    let subconjunto_id = this.navParams.get('subconjunto');
+    this.componenteService.findBySubConjunto (subconjunto_id)
       .subscribe (response => {
         this.items = response  ['componentes'];
-        this.items2 = response  ['subConjunto'];
       },
       error =>{});
-  }
-
-  showComponentesSubConjunto (subconjunto_id: string) {
-    this.navCtrl.push('SubcomponentesPage', {subconjunto: subconjunto_id});
   }
 
 }
