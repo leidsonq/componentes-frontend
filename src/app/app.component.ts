@@ -25,6 +25,7 @@ export class MyApp {
     this.pages = [
       { title: 'Perfil de usuário', component: 'ProfilePage' },
       { title: 'Decomposições de Máquinas', component: 'CategoriasPage' },
+      { title: 'Pesquisar Componente', component: 'PesquisacomchavePage' },
       { title: 'Sair', component: '' }
     ];
 

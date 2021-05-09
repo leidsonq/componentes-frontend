@@ -13,4 +13,13 @@ export class CategoriaService{
     findAll() : Observable<CategoriaDTO[]>{
         return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/modelos`);
     }
+
+
+    sendDecomposicao(id: string, email: String): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/modelos/decomposicao?id=${id}&email=${email}`);
+    }
+
+    sendEstrategicas(id: string, email: String): Observable<any> {
+        return this.http.get<any>(`${API_CONFIG.baseUrl}/modelos/estrategica?id=${id}&email=${email}`);
+    }
 }

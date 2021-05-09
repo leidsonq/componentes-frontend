@@ -3,24 +3,29 @@
     <button ion-button menuToggle> 
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Modelos de Máquinas</ion-title>
+    <ion-title><h5>Modelos de Máquinas</h5></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor= "let item of items" (click)="showConjuntos(item.id)">
-
-      <ion-card>
-        <img src="assets/imgs/mci28.1.png"/>
-        <ion-card-content>
-          <ion-card-title>
-            <h2 text-center>{{item.fabricante}} {{item.modelo}}</h2>
-            </ion-card-title>
-        </ion-card-content>
-      </ion-card>
-
-    </button>
-  </ion-list> 
-
+    <ion-item-sliding *ngFor="let item of items" (click)="showConjuntos(item.id)">
+      <button ion-item >
+        <ion-thumbnail item-start>
+          <img src="assets/imgs/mci28.1.png"/>
+        </ion-thumbnail>
+        <h2 text-left>{{item.fabricante}} {{item.modelo}}</h2>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="enviaDecomposicao (item.id)">
+          <ion-icon name="send"></ion-icon>
+          D      
+        </button>
+        <button ion-button color="secondary" (click)="enviaEstrategicas (item.id)">
+          <ion-icon name="send"></ion-icon>
+          E       
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
