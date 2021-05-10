@@ -28,4 +28,9 @@ export class SubcomponentesPage {
       error =>{});
   }
 
+  showDetail(){
+    this.navCtrl.push('ComponenteDetailPage');
+  }
+
+
 }

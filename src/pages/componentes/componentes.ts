@@ -50,4 +50,8 @@ export class ComponentesPage {
     }
   }
 
+  showDetail(){
+    this.navCtrl.push('ComponenteDetailPage');
+  }
+
 }

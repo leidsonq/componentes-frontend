@@ -41,7 +41,6 @@ import { ComponenteService } from '../services/domain/componente.service';
     UsuarioService,
     ConjuntoService,
     ComponenteService
-    
   ]
 })
 export class AppModule {}

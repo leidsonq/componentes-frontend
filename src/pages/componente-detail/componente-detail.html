@@ -1,0 +1,30 @@
+
+<ion-header>
+
+  <ion-navbar>
+
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    <ion-title>Detalhes do Componente</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+      <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'">
+      <img [src]="item?.imageUrl || 'assets/imgs/prod.jpg'">
+      <ion-card-content>
+       <ion-card-title>
+          {{item?.codigoD}}
+       </ion-card-title>
+
+       <p>
+          {{item?.descricao}}
+       </p>
+
+      </ion-card-content>
+  </ion-card>
+
+</ion-content>

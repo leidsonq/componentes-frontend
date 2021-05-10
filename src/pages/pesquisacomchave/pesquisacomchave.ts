@@ -65,4 +65,8 @@ export class PesquisacomchavePage {
     }
   }
 
+  showDetail(){
+    this.navCtrl.push('ComponenteDetailPage');
+  }
+
 }
