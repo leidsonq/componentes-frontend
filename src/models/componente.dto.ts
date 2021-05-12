@@ -3,4 +3,5 @@ export interface ComponenteDTO {
     descricao: string;
     codigoD: string;
     imageUrl?: string;
+    imageDetailsUrl?: string;
 }

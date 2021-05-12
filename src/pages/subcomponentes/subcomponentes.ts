@@ -28,8 +28,8 @@ export class SubcomponentesPage {
       error =>{});
   }
 
-  showDetail(){
-    this.navCtrl.push('ComponenteDetailPage');
+  showDetail(componente_id: string){
+    this.navCtrl.push('ComponenteDetailPage', {componente_id: componente_id});
   }
 
 

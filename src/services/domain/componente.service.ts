@@ -27,10 +27,23 @@ export class ComponenteService{
         return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/componentes/chave?chave=${chave}`);
     }
 
+    findById(componente_id: string) {
+        return this.http.get<ComponenteDTO>(`${API_CONFIG.baseUrl}/componentes/${componente_id}`);
+    }
+
     getSmallImageFromBucket (codDatasul: string): Observable<any>{
         let url = `${API_CONFIG.bucketBaseUrl}/${codDatasul}-small.jpg`
         return this.http.get(url,{responseType: 'blob'});
+    }
 
+    getImageFromBucket (codDatasul: string): Observable<any>{
+        let url = `${API_CONFIG.bucketBaseUrl}/${codDatasul}.jpg`
+        return this.http.get(url,{responseType: 'blob'});
+    }
+
+    getDetailsImageFromBucket (codDatasul: string): Observable<any>{
+        let url = `${API_CONFIG.bucketBaseUrl}/${codDatasul}-details.jpg`
+        return this.http.get(url,{responseType: 'blob'});
     }
 
 }
