@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { ComponenteDTO } from '../../models/componente.dto';
 import { ComponenteService } from '../../services/domain/componente.service';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 
 @IonicPage()
@@ -19,18 +20,23 @@ export class ComponentesPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public componenteService: ComponenteService) {
+    public componenteService: ComponenteService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     let conjunto_id = this.navParams.get('conjunto');
+    let loader = this.presentLoading();
     this.componenteService.findByConjunto (conjunto_id)
       .subscribe (response => {
         this.items = response  ['componentes'];
         this.items2 = response  ['subConjunto'];
+        loader.dismiss();
         this.loadImagesUrls();
       },
-      error =>{});
+      error =>{
+        loader.dismiss();
+      });
   }
 
   showComponentesSubConjunto (subconjunto_id: string) {
@@ -52,6 +58,14 @@ export class ComponentesPage {
 
   showDetail(componente_id: string){
     this.navCtrl.push('ComponenteDetailPage', {componente_id: componente_id});
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

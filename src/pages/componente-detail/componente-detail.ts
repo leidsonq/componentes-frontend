@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { ComponenteDTO } from '../../models/componente.dto';
 import { ComponenteService } from '../../services/domain/componente.service';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 @IonicPage()
 @Component({
@@ -17,15 +18,17 @@ export class ComponenteDetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public componenteService: ComponenteService) {
+    public componenteService: ComponenteService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
     let componente_id = this.navParams.get('componente_id');
+    let loader = this.presentLoading();
     this.componenteService.findByChave(componente_id)
       .subscribe(response => {
         this.items = response;
-
+        loader.dismiss();
         for (var i=0; i<this.items.length; i++){
           this.item = this.items[i];
         } 
@@ -33,7 +36,9 @@ export class ComponenteDetailPage {
         this.getImageUrlIfExists();
         this.getImageDetailsUrlIfExists();
       },
-      error => {});
+      error => {
+        loader.dismiss();
+      });
   }
 
   getImageUrlIfExists(){
@@ -50,6 +55,14 @@ export class ComponenteDetailPage {
         this.item.imageDetailsUrl = `${API_CONFIG.bucketBaseUrl}/${this.item.codigoD}-details.jpg`
       },
       error => {});
+  }
+
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
   }
 
 }

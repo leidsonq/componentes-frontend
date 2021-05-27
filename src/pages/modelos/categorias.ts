@@ -15,6 +15,8 @@ export class CategoriasPage {
 
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
+  fabMod: CategoriaDTO;
+
 
   constructor(
     public navCtrl: NavController, 
@@ -50,4 +52,15 @@ export class CategoriasPage {
     },
     error => {}); 
   }
+
+  insertFabMod(){
+    this.fabMod= {
+      id: '',
+       fabricante: 'OKUMA',
+       modelo: "LVT400"
+    }
+    this.categoriaService.insertNewModelo (this.fabMod);
+    console.log(this.fabMod);
+  }
+
 }

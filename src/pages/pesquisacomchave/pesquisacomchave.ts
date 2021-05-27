@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
 import { ComponenteDTO } from '../../models/componente.dto';
 import { ComponenteService } from '../../services/domain/componente.service';
+import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 @IonicPage()
 @Component({
@@ -17,41 +18,42 @@ export class PesquisacomchavePage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public componenteService: ComponenteService) {
+    public componenteService: ComponenteService,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
   }
 
   pesquisarPorPalavraChave (palavra: string, tipo: any){
-    console.log(tipo);
-
     if(tipo==1){    
      if (palavra && palavra.trim() != ''){
+      let loader = this.presentLoading();
        this.componenteService.findByChave(palavra)
        .subscribe (response => {
          this.items = response;
+         loader.dismiss();
          this.loadImagesUrls();  
        },
        error =>{
-         console.log(error);
+        loader.dismiss();
        });
      }
     } 
     if(tipo == 2){
       if (palavra && palavra.trim() != ''){
+        let loader = this.presentLoading();
         this.componenteService.findBySubStartWith(palavra)
         .subscribe (response => {
           this.items = response;
+          loader.dismiss();
           this.loadImagesUrls();
         },
         error =>{
-          console.log(error);
+          loader.dismiss();
         });
       }
     }
-
-
   }
 
   loadImagesUrls(){
@@ -68,6 +70,12 @@ export class PesquisacomchavePage {
   showDetail(componente_id: string){
     this.navCtrl.push('ComponenteDetailPage', {componente_id: componente_id});
   }
-
+  presentLoading() {
+    let loader = this.loadingCtrl.create({
+      content: "Aguarde..."
+    });
+    loader.present();
+    return loader;
+  }
 
 }
