@@ -74,8 +74,7 @@ export class PesquisacomchavePage {
     let loader = this.loadingCtrl.create({
       content: "Aguarde..."
     });
-    loader.present();
+
     return loader;
   }
-
 }

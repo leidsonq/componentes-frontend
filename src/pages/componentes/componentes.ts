@@ -25,6 +25,10 @@ export class ComponentesPage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData(){
     let conjunto_id = this.navParams.get('conjunto');
     let loader = this.presentLoading();
     this.componenteService.findByConjunto (conjunto_id)
@@ -66,6 +70,13 @@ export class ComponentesPage {
     });
     loader.present();
     return loader;
+  }
+
+  doRefresh(refresher) {
+    this.loadData();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
 }

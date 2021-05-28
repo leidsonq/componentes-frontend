@@ -7,6 +7,9 @@
 
 </ion-header>
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list inset>
     <button ion-item *ngFor= "let item of items" (click)="showComponentes(item.id)">
       <h2>{{item.descricao}}</h2>
