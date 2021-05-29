@@ -6,7 +6,6 @@ import { CategoriaService } from '../../services/domain/categoria.service';
 import { StorageService } from '../../services/storage.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
-
 @IonicPage()
 @Component({
   selector: 'page-categorias',
@@ -16,7 +15,6 @@ export class CategoriasPage {
 
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
-  fabMod: CategoriaDTO;
 
 
   constructor(
@@ -65,16 +63,6 @@ export class CategoriasPage {
     error => {}); 
   }
   
-  insertFabMod(){
-    this.fabMod= {
-      id: '',
-       fabricante: 'OKUMA',
-       modelo: "LVT400"
-    }
-    this.categoriaService.insertNewModelo (this.fabMod);
-    console.log(this.fabMod);
-  }
-
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Aguarde..."

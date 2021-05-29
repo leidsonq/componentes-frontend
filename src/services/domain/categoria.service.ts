@@ -22,8 +22,15 @@ export class CategoriaService{
     sendEstrategicas(id: string, email: String): Observable<any> {
         return this.http.get<any>(`${API_CONFIG.baseUrl}/modelos/estrategica?id=${id}&email=${email}`);
     }
-
-    insertNewModelo(fabMod: CategoriaDTO): Observable<any> {
-        return this.http.post<any>(`${API_CONFIG.baseUrl}/modelos/insert`);
+    
+    insert(obj: CategoriaDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/modelos`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
     }
 }

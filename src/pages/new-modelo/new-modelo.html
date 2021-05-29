@@ -1,0 +1,22 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Criar Modelo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Fabricante</ion-label>
+      <ion-input name="fab" [(ngModel)]="fab" type="text"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Modelo</ion-label>
+      <ion-input name="mod" [(ngModel)]="mod" type="text"></ion-input>
+    </ion-item> 
+    <button ion-button block color="primary" (click)="insertFabMod(fab, mod)">Salvar</button>
+
+  </ion-list>
+</ion-content>

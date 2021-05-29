@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-fab top right edge>
+    <button navPush="NewModeloPage" ion-fab mini><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -33,24 +36,5 @@
     </ion-item-sliding>
   </ion-list>
 
+</ion-content>
 
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-list inset>
-
-      <ion-item>
-        <ion-label>Fabricante</ion-label>
-        <ion-input name="fab" [(ngModel)]="fab" type="text"></ion-input>
-      </ion-item>
-    
-      <ion-item>
-        <ion-label>Modelo</ion-label>
-        <ion-input name="mod" [(ngModel)]="mod" type="text"></ion-input>
-      </ion-item>
-    
-    </ion-list>
-    <button ion-button primary (click)="insertFabMod ()">
-      <ion-icon name="add"></ion-icon></button>
-  </ion-toolbar>
-</ion-footer>
