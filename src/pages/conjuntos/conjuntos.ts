@@ -12,6 +12,7 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 export class ConjuntosPage {
 
   items: ConjuntoDTO[];
+  mod: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -22,6 +23,8 @@ export class ConjuntosPage {
 
   ionViewDidLoad() {
     this.loadData();
+    this.mod = this.navParams.get('modelo');
+    
   }
 
   loadData(){
@@ -53,4 +56,9 @@ export class ConjuntosPage {
       refresher.complete();
     }, 1000);
   }
+
+  insertNewConjunto(){
+    this.navCtrl.push('NewConjuntoPage', {modelo: this.mod});
+  }
+
 }

@@ -16,7 +16,6 @@ export class CategoriasPage {
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
 
-
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,

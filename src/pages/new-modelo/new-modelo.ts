@@ -29,6 +29,7 @@ export class NewModeloPage {
     }
     this.categoriaService.insert (this.fabMod)
       .subscribe(Response =>{
+        this.navCtrl.setRoot('CategoriasPage');
         console.log("Modelo Criado!")
       },
       error => ({}));

@@ -2,11 +2,17 @@
 <ion-header>
 
   <ion-navbar>
+    <button ion-button menuToggle> 
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Conjuntos</ion-title>
   </ion-navbar>
 
 </ion-header>
 <ion-content padding>
+  <ion-fab top right edge>
+    <button (click)="insertNewConjunto()" ion-fab mini><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>

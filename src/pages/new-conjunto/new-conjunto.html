@@ -1,0 +1,19 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle> 
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Criar Conjunto</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Descrição</ion-label>
+      <ion-input name="descricao" [(ngModel)]="descricao" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+    <button ion-button block color="primary" (click)="insertConjunto(descricao)">Salvar</button>
+</ion-content>

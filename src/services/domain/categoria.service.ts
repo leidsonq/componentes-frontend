@@ -33,4 +33,8 @@ export class CategoriaService{
             }
         );
     }
+
+    findById(modelo_id: string) : Observable<CategoriaDTO>{
+        return this.http.get<CategoriaDTO>(`${API_CONFIG.baseUrl}/modelos/${modelo_id}`);
+    }
 }
