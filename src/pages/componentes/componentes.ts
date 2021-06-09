@@ -15,6 +15,7 @@ export class ComponentesPage {
 
   items: ComponenteDTO[];
   items2: ComponenteDTO[];
+  conj: string;
 
 
   constructor(
@@ -26,6 +27,7 @@ export class ComponentesPage {
 
   ionViewDidLoad() {
     this.loadData();
+    this.conj = this.navParams.get('conjunto');
   }
 
   loadData(){
@@ -77,6 +79,10 @@ export class ComponentesPage {
     setTimeout(() => {
       refresher.complete();
     }, 1000);
+  }
+
+  insertNewComponente(){
+    this.navCtrl.push('NewSubconjuntoPage', {conjunto: this.conj});
   }
 
 }

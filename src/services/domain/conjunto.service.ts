@@ -25,4 +25,8 @@ export class ConjuntoService{
             }
         );
     }
+
+    findById(conjunto_id: string) : Observable<ConjuntoDTO>{
+        return this.http.get<ConjuntoDTO>(`${API_CONFIG.baseUrl}/conjuntos/${conjunto_id}`);
+    }
 }

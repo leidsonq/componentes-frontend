@@ -46,4 +46,15 @@ export class ComponenteService{
         return this.http.get(url,{responseType: 'blob'});
     }
 
+    insert(obj: ComponenteDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/componentes`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
+
 }
