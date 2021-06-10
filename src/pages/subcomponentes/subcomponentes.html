@@ -1,16 +1,22 @@
 
 <ion-header>
   <ion-navbar>
+    <button ion-button menuToggle> 
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Componentes</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-fab top right edge>
+    <button (click)="insertNewComponente()" ion-fab mini><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showDetail(item.id)">
+    <button ion-item *ngFor="let item of items" (click)="showDetail(item.codigoD)">
       <ion-thumbnail item-start>
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
       </ion-thumbnail>

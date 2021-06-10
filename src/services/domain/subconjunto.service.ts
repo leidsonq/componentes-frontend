@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
 import { API_CONFIG } from "../../config/api.config";
 import { SubConjuntoDTO } from "../../models/subconjunto.dto";
 
@@ -19,6 +20,10 @@ export class SubConjuntoService{
                 responseType: 'text'
             }
         );
+    }
+
+    findById(subConjunto_id: string) : Observable<SubConjuntoDTO>{
+        return this.http.get<SubConjuntoDTO>(`${API_CONFIG.baseUrl}/subconjuntos/${subConjunto_id}`);
     }
 
 }

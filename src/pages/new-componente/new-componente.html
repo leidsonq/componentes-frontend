@@ -1,0 +1,19 @@
+
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle> 
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Criar Componente</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list inset>
+    <ion-item>
+      <ion-label>Item</ion-label>
+      <ion-input name="item" [(ngModel)]="item" type="text"></ion-input>
+    </ion-item>
+  </ion-list>
+    <button ion-button block color="primary" (click)="insertComponente(item)">Criar</button>
+</ion-content>

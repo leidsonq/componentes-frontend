@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ComponenteDTO } from '../../models/componente.dto';
 import { ComponenteService } from '../../services/domain/componente.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { API_CONFIG } from '../../config/api.config';
 
 
 @IonicPage()
@@ -13,6 +14,7 @@ import { LoadingController } from 'ionic-angular/components/loading/loading-cont
 export class SubcomponentesPage {
 
   items: ComponenteDTO[];
+  subConj: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -23,6 +25,8 @@ export class SubcomponentesPage {
 
   ionViewDidLoad() {
     this.loadData();
+    this.subConj = this.navParams.get('subconjunto');
+
   }
   loadData(){
     let subconjunto_id = this.navParams.get('subconjunto');
@@ -31,6 +35,7 @@ export class SubcomponentesPage {
       .subscribe (response => {
         this.items = response  ['componentes'];
         loader.dismiss();
+        this.loadImagesUrls();
       },
       error =>{
         loader.dismiss();
@@ -52,5 +57,20 @@ export class SubcomponentesPage {
     setTimeout(() => {
       refresher.complete();
     }, 1000);
+  }
+
+  insertNewComponente(){
+    this.navCtrl.push('NewComponentePage', {subconjunto: this.subConj});
+  }
+
+  loadImagesUrls(){
+    for (var i=0; i<this.items.length; i++){
+      let item = this.items[i];
+      this.componenteService.getSmallImageFromBucket(item.codigoD)
+        .subscribe(response =>{
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}-small.jpg`     
+        },
+        error =>{});
+    }
   }
 }
