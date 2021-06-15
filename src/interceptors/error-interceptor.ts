@@ -39,13 +39,16 @@ export class ErrorInterceptor implements HttpInterceptor {
                   this.handle401();
                   break;
 
-                  case 422:
-                    this.handle422(errorObj);
-                    break;
+                case 422:
+                  this.handle422(errorObj);
+                  break;
+
+                case 500:
+                  this.handle500(errorObj);
+                  break;
                 
                 default:
-                  this.handleDefaultError(errorObj);
-                  
+                  this.handleDefaultError(errorObj);   
               }
 
               return Observable.throw(errorObj);
@@ -83,7 +86,21 @@ export class ErrorInterceptor implements HttpInterceptor {
           alert.present();
       
         }
-
+        
+        handle500(errorObj){
+          let alert = this.alertC.create({
+            title: 'Já cadastrado!',
+            message: 'Item já cadastrado no banco de dados',
+            enableBackdropDismiss: false,
+            buttons: [
+              {
+                text: 'OK'
+              }
+            ]
+          });
+          alert.present();
+      
+        }
         private listErrors(messages : FieldMessage[]) : string {
           let s : string = '';
           for (var i=0; i<messages.length; i++) {
@@ -105,6 +122,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           });
           alert.present();
         }
+
 }
 
 export const ErrorIterceptorProvider = {

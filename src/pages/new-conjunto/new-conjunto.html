@@ -9,11 +9,13 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list inset>
+  <form [formGroup]='formGroup' (ngSubmit)="insertConjunto(conjunto); $event.preventDefault()">
     <ion-item>
-      <ion-label>Descrição</ion-label>
-      <ion-input name="descricao" [(ngModel)]="descricao" type="text"></ion-input>
+      <ion-label stacked>Descrição*</ion-label>
+      <ion-input  formControlName="conjunto" name="conjunto" [(ngModel)]="conjunto" type="text"></ion-input>
     </ion-item>
-  </ion-list>
-    <button ion-button block color="primary" (click)="insertConjunto(descricao)">Criar</button>
+    <p class="danger" *ngIf="formGroup.controls.conjunto.dirty && formGroup.controls.conjunto.errors">Valor inválido</p>
+
+    <button ion-button primary type="submit" [disabled]="formGroup.invalid">Criar</button>
+  </form>
 </ion-content>

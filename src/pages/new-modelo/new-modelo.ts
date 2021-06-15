@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { CategoriaService } from '../../services/domain/categoria.service';
 
@@ -11,11 +12,19 @@ import { CategoriaService } from '../../services/domain/categoria.service';
 export class NewModeloPage {
 
   fabMod: CategoriaDTO;
+  formGroup: FormGroup;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public categoriaService: CategoriaService) {
+    public categoriaService: CategoriaService,
+    public alertC: AlertController,
+    public formBuilder: FormBuilder) {
+
+      this.formGroup = formBuilder.group({
+        fab: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+        mod: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]]
+      })
   }
 
   ionViewDidLoad() {
@@ -24,15 +33,19 @@ export class NewModeloPage {
   insertFabMod(fab: string, mod: string){
     this.fabMod= {
       id: '',
-       fabricante: fab,
-       modelo: mod
+       fabricante: fab.toUpperCase(),
+       modelo: mod.toUpperCase()
     }
     this.categoriaService.insert (this.fabMod)
       .subscribe(Response =>{
         this.navCtrl.setRoot('CategoriasPage');
         console.log("Modelo Criado!")
       },
-      error => ({}));
+      error => {
+        if (error.status == 500) {
+          this.navCtrl.setRoot('CategoriasPage');
+        }
+      });
   }
 
 }

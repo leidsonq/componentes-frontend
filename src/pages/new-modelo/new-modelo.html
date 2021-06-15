@@ -9,17 +9,20 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-list inset>
+  <form [formGroup]='formGroup' (ngSubmit)="insertFabMod(fab, mod); $event.preventDefault()">
     <ion-item>
-      <ion-label>Fabricante</ion-label>
-      <ion-input name="fab" [(ngModel)]="fab" type="text"></ion-input>
+      <ion-label stacked>Fabricante*</ion-label>
+      <ion-input  formControlName="fab" name="fab" [(ngModel)]="fab" type="text"></ion-input>
     </ion-item>
-  
-    <ion-item>
-      <ion-label>Modelo</ion-label>
-      <ion-input name="mod" [(ngModel)]="mod" type="text"></ion-input>
-    </ion-item> 
-    <button ion-button block color="primary" (click)="insertFabMod(fab, mod)">Criar</button>
+    <p class="danger" *ngIf="formGroup.controls.fab.dirty && formGroup.controls.fab.errors">Valor inválido</p>
 
-  </ion-list>
+    <ion-item>
+      <ion-label stacked>Modelo*</ion-label>
+      <ion-input  formControlName="mod" name="mod" [(ngModel)]="mod" type="text"></ion-input>
+    </ion-item>
+    <p class="danger" *ngIf="formGroup.controls.mod.dirty && formGroup.controls.mod.errors">Valor inválido</p>
+
+    <button ion-button primary type="submit" [disabled]="formGroup.invalid">Criar</button>
+
+  </form>
 </ion-content>
