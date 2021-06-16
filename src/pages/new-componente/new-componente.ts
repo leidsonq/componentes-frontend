@@ -55,7 +55,7 @@ export class NewComponentePage {
     },
     error => {});
   }
-    //faz uma busca no banco para obter o conjunto referente ao id recebido como parâmetro na navegação
+    //faz uma busca no banco para obter o subconjunto referente ao id recebido como parâmetro na navegação
     obterSubConjunto(id: string){
       this.SubconjuntoService.findById(id)
         .subscribe (response=>{

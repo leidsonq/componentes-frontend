@@ -26,4 +26,8 @@ export class SubConjuntoService{
         return this.http.get<SubConjuntoDTO>(`${API_CONFIG.baseUrl}/subconjuntos/${subConjunto_id}`);
     }
 
+    findByConjunto(conjunto_id: string) {
+        return this.http.get(`${API_CONFIG.baseUrl}/conjuntos/${conjunto_id}`);
+}
+
 }

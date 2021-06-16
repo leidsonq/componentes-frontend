@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ComponenteDTO } from '../../models/componente.dto';
 import { ConjuntoDTO } from '../../models/conjunto.dto';
 import { SubConjuntoDTO } from '../../models/subconjunto.dto';
@@ -20,19 +20,86 @@ export class NewSubconjuntoPage {
   componente: ComponenteDTO;
   obj: ComponenteDTO;
   items: ComponenteDTO[];
+  itemsSub: SubConjuntoDTO[];
+  itemsCom: ComponenteDTO[];
+  exist: boolean;
 
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
      public subConjuntoService: SubConjuntoService,
      public conjuntoService: ConjuntoService,
-     public componenteService: ComponenteService) {
+     public componenteService: ComponenteService,
+     public alertC: AlertController) {
   }
 
   ionViewDidLoad() {
     this.conjunto = this.navParams.get('conjunto');
     this.obterConjunto(this.conjunto);
   }
+
+  //insere um novo subConjunto ou componente no conjunto recebido pelo parâmetro de navegação de página
+  insertComponenteOuSubConjunto(codigoD: string, tipo: any){
+    this.findComponenteOuSubSConjunto(codigoD, tipo);
+  }
+
+
+  //Verifica se o subConjunto ou componente já está no conjunto 
+  findComponenteOuSubSConjunto (codigoD: string, tipo: any){
+    
+    let conjunto_id = this.navParams.get('conjunto');
+
+    this.subConjuntoService.findByConjunto (conjunto_id)
+      .subscribe (response => {
+        this.itemsSub = response ['subConjunto'];
+        this.itemsCom = response ['componentes'];
+
+      this.exist = false;
+
+      for (var i=0; i<this.itemsSub.length; i++ ){
+        if(this.itemsSub[i].codigoD == codigoD){
+            this.exist = true;
+            this.navCtrl.setRoot('ComponentesPage', {conjunto: conjunto_id});
+            let alert = this.alertC.create({
+              title: 'Já cadastrado!',
+              message: 'SubConjunto já cadastrado para este conjunto',
+              enableBackdropDismiss: false,
+              buttons: [
+                {
+                  text: 'OK'
+                }
+              ]
+            });
+            alert.present();  
+        }
+      }
+
+      for (var i=0; i<this.itemsCom.length; i++ ){
+        if(this.itemsCom[i].codigoD == codigoD){
+            this.exist = true;
+            this.navCtrl.setRoot('ComponentesPage', {conjunto: conjunto_id});
+            let alert = this.alertC.create({
+              title: 'Já cadastrado!',
+              message: 'Componente já cadastrado para este conjunto',
+              enableBackdropDismiss: false,
+              buttons: [
+                {
+                  text: 'OK'
+                }
+              ]
+            });
+            alert.present();  
+        }
+      }
+
+      if(!this.exist){
+        this.inserirNovoSubconjuntoOuComponente(codigoD, tipo);
+      }
+      },
+      error =>{});
+
+  }
+
   //insere um novo subconjunto ou componente no conjunto recebido pelo parâmetro de navegação de página
   inserirNovoSubconjuntoOuComponente(item: string, tipo: any){
 

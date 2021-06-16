@@ -10,7 +10,7 @@
 <ion-content>
   <div style="display:flex">
     <ion-input name="item" [(ngModel)]="item" type="text" placeholder="Digite o código do item"></ion-input>
-    <button ion-button primary (click)="inserirNovoSubconjuntoOuComponente(item, tipo)">
+    <button ion-button primary (click)="insertComponenteOuSubConjunto(item, tipo)">
       Criar</button>
   </div>
 <ion-list radio-group name="tipo" [(ngModel)]="tipo">
