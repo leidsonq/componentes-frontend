@@ -27,6 +27,10 @@ export class ComponenteService{
         return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/componentes/chave?chave=${chave}`);
     }
 
+    findByCodigo(codigo: string): Observable<ComponenteDTO[]> {
+        return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/componentes/codigo?codigo=${codigo}`);
+    }
+
     findById(componente_id: string) {
         return this.http.get<ComponenteDTO>(`${API_CONFIG.baseUrl}/componentes/${componente_id}`);
     }
