@@ -15,6 +15,7 @@ export class CategoriasPage {
 
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
+  controle: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -22,6 +23,7 @@ export class CategoriasPage {
     public categoriaService: CategoriaService,
     public storage: StorageService,
     public loadingCtrl: LoadingController) {
+     
   }
 
   ionViewDidLoad() {
@@ -52,8 +54,10 @@ export class CategoriasPage {
       console.log("Enviado com sucesso!")
     },
     error => {}); 
+    this.controle= true;
+    this.navCtrl.push('CategoriasPage');
   }
-   //envia as estratégicas por email em forma de string
+  //envia as estratégicas por email em forma de string
   enviaEstrategicas (id: string){
     let localUser = this.storage.getLocalUser();
     this.categoriaService.sendEstrategicas(id, localUser.email).subscribe (response =>{
@@ -75,4 +79,25 @@ export class CategoriasPage {
       refresher.complete();
     }, 1000);
   }
+
+  controlador(item_id: string){
+    if(this.controle==false){
+      this.showConjuntos(item_id);
+    }
+  }
+
+  delete (id: string){
+    this.categoriaService.delete(id).subscribe (response =>{
+      console.log("Excluído com sucesso!")
+    },
+    error => {}); 
+    this.controle= true;
+    this.navCtrl.push('CategoriasPage');
+  }
+
+  editar(id: string){
+    this.controle= true;
+    this.navCtrl.push('NewModeloPage', {modelo: id, tipo: 2});
+  }
+
 }

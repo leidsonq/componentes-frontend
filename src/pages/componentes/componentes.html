@@ -17,6 +17,7 @@
   </ion-refresher>
   
   <ion-list>
+    <ion-item-divider color="light">SUBCONJUNTOS</ion-item-divider>
     <button ion-item *ngFor="let item of items2" (click)="showComponentesSubConjunto(item.id)">
       <ion-thumbnail item-start>
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
@@ -29,6 +30,7 @@
    </ion-list>
 
    <ion-list>
+    <ion-item-divider color="light">COMPONENTES</ion-item-divider>
     <button ion-item *ngFor="let item of items" (click)="showDetail(item.codigoD)">
       <ion-thumbnail item-start>
         <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">

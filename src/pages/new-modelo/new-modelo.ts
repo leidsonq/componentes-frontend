@@ -13,6 +13,7 @@ export class NewModeloPage {
 
   fabMod: CategoriaDTO;
   formGroup: FormGroup;
+  tipo: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -25,9 +26,11 @@ export class NewModeloPage {
         fab: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
         mod: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]]
       })
+
   }
 
   ionViewDidLoad() {
+   this.tipo=="1"
   }
 
   insertFabMod(fab: string, mod: string){
@@ -46,6 +49,34 @@ export class NewModeloPage {
           this.navCtrl.setRoot('CategoriasPage');
         }
       });
+  }
+
+  editar (fab: string, mod: string){
+    console.log(fab);
+    this.fabMod= {
+      id: this.navParams.get('modelo'),
+       fabricante: fab.toUpperCase(),
+       modelo: mod.toUpperCase()
+    }
+    this.categoriaService.update (this.fabMod, this.navParams.get('modelo'))
+      .subscribe(Response =>{
+        this.navCtrl.setRoot('CategoriasPage');
+        console.log("Modelo Atualizado!")
+      },
+      error => {
+        if (error.status == 500) {
+          this.navCtrl.setRoot('CategoriasPage');
+        }
+      });
+  }
+
+  salvar(fab: string, mod: string){
+    this.tipo = this.navParams.get('tipo');
+    if (this.tipo =='2'){
+      this.editar (fab, mod);
+    } else{
+      this.insertFabMod(fab, mod);
+    }
   }
 
 }

@@ -13,6 +13,7 @@ export class ConjuntosPage {
 
   items: ConjuntoDTO[];
   mod: string;
+  controle: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -59,6 +60,26 @@ export class ConjuntosPage {
 
   insertNewConjunto(){
     this.navCtrl.push('NewConjuntoPage', {modelo: this.mod});
+  }
+
+  delete(id: string){
+    this.conjuntoService.delete(id).subscribe (response =>{
+      console.log("Excluído com sucesso!")
+    },
+    error => {}); 
+    this.controle= true;
+    this.navCtrl.push('ConjuntosPage', {modelo: this.mod});
+  }
+
+  editar(id: string){
+    this.controle= true;
+    this.navCtrl.push('NewConjuntoPage', {conjunto: id, tipo: 2, modelo: this.mod});
+  }
+
+  controlador(item_id: string){
+    if(this.controle==false){
+      this.showComponentes(item_id);
+    }
   }
 
 }

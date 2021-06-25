@@ -29,4 +29,19 @@ export class ConjuntoService{
     findById(conjunto_id: string) : Observable<ConjuntoDTO>{
         return this.http.get<ConjuntoDTO>(`${API_CONFIG.baseUrl}/conjuntos/${conjunto_id}`);
     }
+
+    delete(id: string): Observable<any> {
+        return this.http.delete<any>(`${API_CONFIG.baseUrl}/conjuntos/${id}`);
+    }
+
+    update(obj: ConjuntoDTO, id: string) {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/conjuntos/${id}`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
 }

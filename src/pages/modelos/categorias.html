@@ -16,24 +16,27 @@
   </ion-refresher>
   
   <ion-list>
-    <ion-item-sliding *ngFor="let item of items" (click)="showConjuntos(item.id)">
-      <button ion-item >
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/mci28.1.png"/>
-        </ion-thumbnail>
-        <h2 text-left>{{item.fabricante}} {{item.modelo}}</h2>
-      </button>
-      <ion-item-options side="right">
-        <button ion-button color="primary" (click)="enviaDecomposicao (item.id)">
-          <ion-icon name="send"></ion-icon>
-          D      
+    <ion-item *ngFor="let item of items" (click)="controlador(item.id)">
+      <ion-card>
+        <button ion-item>
+          <ion-thumbnail item-start>
+            <img src="assets/imgs/mci28.1.png"/>
+          </ion-thumbnail>
+          <h2 text-left>{{item.fabricante}} {{item.modelo}}</h2>
         </button>
-        <button ion-button color="secondary" (click)="enviaEstrategicas (item.id)">
-          <ion-icon name="send"></ion-icon>
-          E       
+        <button ion-button  color="light" (click)="enviaDecomposicao (item.id)">
+          <ion-icon name="send" color="primary"></ion-icon>  
         </button>
-      </ion-item-options>
-    </ion-item-sliding>
+        <button ion-button  color="light">
+          <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>  
+        </button>
+        <button ion-button  color="light">
+          <ion-icon name="create" color="primary" (click)="editar(item.id)"></ion-icon>  
+        </button>
+        
+      </ion-card>
+    </ion-item>
+    
   </ion-list>
 
 </ion-content>

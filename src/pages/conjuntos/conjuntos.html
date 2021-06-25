@@ -16,9 +16,20 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  
   <ion-list inset>
-    <button ion-item *ngFor= "let item of items" (click)="showComponentes(item.id)">
-      <h2>{{item.descricao}}</h2>
-    </button> 
+    <ion-item *ngFor= "let item of items" (click)="controlador(item.id)">
+      <ion-card>
+        <button ion-item>
+          <h2>{{item.descricao}}</h2>
+        </button>
+        <button ion-button  color="light">
+          <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>  
+        </button>
+        <button ion-button  color="light">
+          <ion-icon name="create" color="primary" (click)="editar(item.id)"></ion-icon>  
+        </button>
+      </ion-card>
+    </ion-item> 
   </ion-list>
 </ion-content>

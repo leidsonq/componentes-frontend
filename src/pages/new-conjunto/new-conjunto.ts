@@ -21,6 +21,7 @@ export class NewConjuntoPage {
   items: ConjuntoDTO[];
   exist: boolean;
   formGroup: FormGroup;
+  tipo: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -38,10 +39,7 @@ export class NewConjuntoPage {
   ionViewDidLoad() {
     this.mod = this.navParams.get('modelo');
     this.obterFabricante(this.mod);
-  }
-  //insere um novo conjunto no modelo recebido pelo parâmetro de navegação de página
-  insertConjunto(descricao: string){
-      this.findConjunto(descricao);
+    this.tipo=="1"
   }
   //faz uma busca no banco para obter o modelo referente ao id recebido como parâmetro na navegação
   obterFabricante(id: string){
@@ -52,9 +50,50 @@ export class NewConjuntoPage {
       error => ({}));
   }
 
-  //Verifica se o conjunto já está cadastrado no modelo 
-  findConjunto(conjunto: string){
-    
+  //Inserir o conjunto caso ele não exista
+  insertConjunto(descricao: string){
+    this.conj= {
+      id: '',
+      descricao: descricao.toUpperCase(),
+      fabricanteModelo: this.fabMod,
+      codigoD: ""
+
+   }
+   this.conjuntoService.insert (this.conj)
+     .subscribe(Response =>{
+       console.log("Conjunto Criado!")
+       this.navCtrl.setRoot('ConjuntosPage', {modelo: this.mod});
+     },
+     error => {});
+  }
+  //Editar conjunto
+  editar(descricao: string){
+    this.conj= {
+      id: this.navParams.get('conjunto'),
+      descricao: descricao.toUpperCase(),
+      fabricanteModelo: this.fabMod,
+      codigoD: ""
+  
+    }
+    this.conjuntoService.update (this.conj, this.navParams.get('conjunto'))
+      .subscribe(Response =>{
+        console.log("Conjunto Atualizado!")
+        this.navCtrl.setRoot('ConjuntosPage', {modelo: this.mod});
+      },
+      error => {});
+  }
+
+  salvar(descricao: string){  
+    this.tipo = this.navParams.get('tipo');
+    console.log(this.tipo);
+    if (this.tipo =='2'){
+      this.editar (descricao);
+    } else{
+      this.insertConjunto(descricao);
+    }
+  }
+
+  verificarSeConjuntoExiste(conjunto: string){
     let modelo_id = this.navParams.get('modelo');
 
     this.conjuntoService.findByModelo (modelo_id)
@@ -79,28 +118,9 @@ export class NewConjuntoPage {
         }
       }
       if(!this.exist){
-        this.InsertConjCaseNotExist(conjunto);
+        this.salvar(conjunto);
       }
-      },
+    },
       error =>{});
-
   }
-
-  //Inserir o conjunto caso ele não exista
-  InsertConjCaseNotExist(descricao: string){
-    this.conj= {
-      id: '',
-      descricao: descricao.toUpperCase(),
-      fabricanteModelo: this.fabMod,
-      codigoD: ""
-
-   }
-   this.conjuntoService.insert (this.conj)
-     .subscribe(Response =>{
-       console.log("Conjunto Criado!")
-       this.navCtrl.setRoot('ConjuntosPage', {modelo: this.mod});
-     },
-     error => {});
-  }
-
 }

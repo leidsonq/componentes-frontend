@@ -37,4 +37,19 @@ export class CategoriaService{
     findById(modelo_id: string) : Observable<CategoriaDTO>{
         return this.http.get<CategoriaDTO>(`${API_CONFIG.baseUrl}/modelos/${modelo_id}`);
     }
+
+    delete(id: string): Observable<any> {
+        return this.http.delete<any>(`${API_CONFIG.baseUrl}/modelos/${id}`);
+    }
+
+    update(obj: CategoriaDTO, id: string) {
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/modelos/${id}`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            }
+        );
+    }
 }

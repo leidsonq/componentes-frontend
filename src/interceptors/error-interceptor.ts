@@ -46,6 +46,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 case 500:
                   this.handle500(errorObj);
                   break;
+
+                case 400:
+                  this.handle400(errorObj);
+                  break;
                 
                 default:
                   this.handleDefaultError(errorObj);   
@@ -85,6 +89,21 @@ export class ErrorInterceptor implements HttpInterceptor {
           });
           alert.present();
       
+        }
+
+
+        handle400(errorObj){
+          let alert = this.alertC.create({
+            title: 'Impossível excluir!',
+            message: errorObj.message,
+            enableBackdropDismiss: false,
+            buttons: [
+              {
+                text: 'OK'
+              }
+            ]
+          });
+          alert.present();
         }
         
         handle500(errorObj){
