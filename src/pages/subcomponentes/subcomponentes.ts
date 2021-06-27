@@ -15,6 +15,7 @@ export class SubcomponentesPage {
 
   items: ComponenteDTO[];
   subConj: string;
+  controle: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -72,5 +73,20 @@ export class SubcomponentesPage {
         },
         error =>{});
     }
+  }
+
+  controlador(componente_id: string){
+    if(this.controle==false){
+      this.showDetail(componente_id);
+    }
+  }
+
+  delete(id: string){
+    this.componenteService.delete(id).subscribe (response =>{
+      console.log("Excluído com sucesso!")
+    },
+    error => {}); 
+    this.controle= true
+    this.navCtrl.push('SubcomponentesPage', {subconjunto: this.subConj});
   }
 }

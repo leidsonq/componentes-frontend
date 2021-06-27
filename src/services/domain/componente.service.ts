@@ -61,4 +61,8 @@ export class ComponenteService{
         );
     }
 
+    delete(id: string): Observable<any> {
+        return this.http.delete<any>(`${API_CONFIG.baseUrl}/componentes/${id}`);
+    }
+
 }

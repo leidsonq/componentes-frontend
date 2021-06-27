@@ -28,6 +28,9 @@ export class SubConjuntoService{
 
     findByConjunto(conjunto_id: string) {
         return this.http.get(`${API_CONFIG.baseUrl}/conjuntos/${conjunto_id}`);
-}
+    }
+    delete(id: string): Observable<any> {
+        return this.http.delete<any>(`${API_CONFIG.baseUrl}/subconjuntos/${id}`);
+    }
 
 }

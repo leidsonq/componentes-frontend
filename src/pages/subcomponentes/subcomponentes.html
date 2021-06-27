@@ -15,16 +15,24 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="showDetail(item.codigoD)">
-      <ion-thumbnail item-start>
-        <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
-      </ion-thumbnail>
- 
-      <h2>{{item.codigoD}}</h2>
-      <p style="font-size: 10px">{{item.descricao}}</p>
- 
-    </button>
-   </ion-list>
+
+   <ion-list inset>
+    <ion-item *ngFor="let item of items" (click)="controlador(item.codigoD)">
+      <ion-card>
+        <button ion-item>
+          <ion-thumbnail item-start>
+            <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
+          </ion-thumbnail>
+     
+          <h2>{{item.codigoD}}</h2>
+          <p style="font-size: 10px">{{item.descricao}}</p>
+        </button>
+        <button ion-button  color="light">
+          <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>  
+        </button>
+      </ion-card>
+    </ion-item> 
+  </ion-list>
+
 
 </ion-content>
