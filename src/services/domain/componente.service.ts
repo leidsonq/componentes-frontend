@@ -65,4 +65,8 @@ export class ComponenteService{
         return this.http.delete<any>(`${API_CONFIG.baseUrl}/componentes/${id}`);
     }
 
+    findByCodigoD(codigo: string): Observable<ComponenteDTO> {
+        return this.http.get<ComponenteDTO>(`${API_CONFIG.baseUrl}/componentes/codd?codigo=${codigo}`);
+    }
+
 }

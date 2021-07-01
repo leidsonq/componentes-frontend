@@ -25,16 +25,12 @@ export class ComponenteDetailPage {
   ionViewDidLoad() {
     let componente_id = this.navParams.get('componente_id');
     let loader = this.presentLoading();
-    this.componenteService.findByChave(componente_id)
+    this.componenteService.findByCodigoD(componente_id)
       .subscribe(response => {
-        this.items = response;
-        loader.dismiss();
-        for (var i=0; i<this.items.length; i++){
-          this.item = this.items[i];
-        } 
-
+        this.item = response;
         this.getImageUrlIfExists();
         this.getImageDetailsUrlIfExists();
+        loader.dismiss();
       },
       error => {
         loader.dismiss();
