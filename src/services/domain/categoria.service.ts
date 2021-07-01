@@ -52,4 +52,8 @@ export class CategoriaService{
             }
         );
     }
+
+    findBySubStartWith(inicio: string): Observable<CategoriaDTO[]> {
+        return this.http.get<CategoriaDTO[]>(`${API_CONFIG.baseUrl}/modelos/inicio?inicio=${inicio}`);
+    }
 }

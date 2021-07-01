@@ -4,17 +4,17 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title><h5>Modelos de Máquinas</h5></ion-title>
+      <ion-searchbar showCancelButton="always" (ionInput)="findModelo(($event))"></ion-searchbar>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  <ion-fab top right edge>
+  <ion-fab top left edge>
     <button navPush="NewModeloPage" ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  
   <ion-list>
     <ion-item *ngFor="let item of items" (click)="controlador(item.id)">
       <ion-card>
@@ -38,6 +38,5 @@
     </ion-item>
     
   </ion-list>
-
 </ion-content>
 

@@ -22,12 +22,13 @@ export class CategoriasPage {
     public navParams: NavParams,
     public categoriaService: CategoriaService,
     public storage: StorageService,
-    public loadingCtrl: LoadingController) {
-     
+    public loadingCtrl: LoadingController) {   
+      
   }
 
   ionViewDidLoad() {
-    this.loadData();
+      this.loadData();
+     
   }
 
   loadData(){
@@ -100,4 +101,28 @@ export class CategoriasPage {
     this.navCtrl.push('NewModeloPage', {modelo: id, tipo: 2});
   }
 
+  inicializarItens(){
+    this.categoriaService.findAll().subscribe(response => {
+      this.items = response;
+    },
+    error => {});
+  }
+  //faz a busca conforme pesquisa da search-bar
+  findModelo(ev: any) {
+    this.inicializarItens();
+    const val = ev.target.value;
+  
+    // se o valor for uma string vazia não filtre os itens
+    if (val && val.trim() != '') {
+        this.categoriaService.findBySubStartWith(val)
+        .subscribe(response=>{
+          this.items = response;
+        },
+        error=>{});
+    }
+
+  }
+
+
+  
 }
