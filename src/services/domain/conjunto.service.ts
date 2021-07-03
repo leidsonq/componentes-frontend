@@ -44,4 +44,8 @@ export class ConjuntoService{
             }
         );
     }
+
+    findByPalavraChave(palavra: string, modelo_id: string) : Observable<ConjuntoDTO[]>{
+        return this.http.get<ConjuntoDTO[]>(`${API_CONFIG.baseUrl}/conjuntos/buscar?inicio=${palavra}&id=${modelo_id}`);
+    }
 }

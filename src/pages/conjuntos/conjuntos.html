@@ -6,11 +6,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Conjuntos</ion-title>
+    <ion-searchbar showCancelButton="always" (ionInput)="findConjunto(($event))"></ion-searchbar>
   </ion-navbar>
 
 </ion-header>
 <ion-content padding>
-  <ion-fab top right edge>
+  <ion-fab top left edge>
     <button (click)="insertNewConjunto()" ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">

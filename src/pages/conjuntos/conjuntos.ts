@@ -23,9 +23,8 @@ export class ConjuntosPage {
   }
 
   ionViewDidLoad() {
-    this.loadData();
     this.mod = this.navParams.get('modelo');
-    
+    this.loadData();
   }
 
   loadData(){
@@ -81,5 +80,30 @@ export class ConjuntosPage {
       this.showComponentes(item_id);
     }
   }
+
+  inicializarItens(){
+    let modelo_id = this.navParams.get('modelo');
+    this.conjuntoService.findByModelo (modelo_id)
+      .subscribe (response => {
+        this.items = response ['conjuntos'];
+      },
+      error =>{});
+
+  }
+  //faz a busca conforme pesquisa da search-bar
+  findConjunto(ev: any) {
+    this.inicializarItens();
+    const val = ev.target.value;
+  
+     // se o valor for uma string vazia não filtre os itens
+     if (val && val.trim() != '') {
+      this.conjuntoService.findByPalavraChave(val, this.mod)
+      .subscribe(response=>{
+        this.items = response;
+      },
+      error=>{});
+  }
+
+}
 
 }

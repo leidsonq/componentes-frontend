@@ -27,8 +27,7 @@ export class CategoriasPage {
   }
 
   ionViewDidLoad() {
-      this.loadData();
-     
+      this.loadData();     
   }
 
   loadData(){
@@ -111,7 +110,7 @@ export class CategoriasPage {
   findModelo(ev: any) {
     this.inicializarItens();
     const val = ev.target.value;
-  
+
     // se o valor for uma string vazia não filtre os itens
     if (val && val.trim() != '') {
         this.categoriaService.findBySubStartWith(val)
