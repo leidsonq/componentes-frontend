@@ -5,11 +5,12 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Componentes</ion-title>
+    <ion-searchbar showCancelButton="always" (ionInput)="findComponentes(($event))"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-fab top right edge>
+  <ion-fab top left edge>
     <button (click)="insertNewComponente()" ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">

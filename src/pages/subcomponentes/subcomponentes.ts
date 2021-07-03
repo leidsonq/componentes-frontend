@@ -25,9 +25,8 @@ export class SubcomponentesPage {
   }
 
   ionViewDidLoad() {
-    this.loadData();
     this.subConj = this.navParams.get('subconjunto');
-
+    this.loadData();
   }
   loadData(){
     let subconjunto_id = this.navParams.get('subconjunto');
@@ -89,4 +88,32 @@ export class SubcomponentesPage {
     this.controle= true
     this.navCtrl.push('SubcomponentesPage', {subconjunto: this.subConj});
   }
+
+
+  inicializarItens(){
+    let subconjunto_id = this.navParams.get('subconjunto');
+    this.componenteService.findBySubConjunto (subconjunto_id)
+      .subscribe (response => {
+        this.items = response  ['componentes'];
+
+        this.loadImagesUrls();
+      },
+      error =>{});
+
+  }
+  //faz a busca conforme pesquisa da search-bar de componentes do subConjunto
+  findComponentes(ev: any) {
+    this.inicializarItens();
+    const val = ev.target.value;
+  
+     // se o valor for uma string vazia não filtre os itens
+     if (val && val.trim() != '') {
+      this.componenteService.findComInSub(val, this.subConj)
+      .subscribe(response=>{
+        this.items = response;
+      },
+      error=>{});
+  }
+
+}
 }
