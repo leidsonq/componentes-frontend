@@ -129,7 +129,7 @@ export class ComponentesPage {
       });
 
   }
-  //faz a busca conforme pesquisa da search-bar
+  //faz a busca conforme pesquisa da search-bar de subConjuntos
   findSubConjunto(ev: any) {
     this.inicializarItens();
     const val = ev.target.value;
@@ -139,6 +139,22 @@ export class ComponentesPage {
       this.subConjuntoService.findByPalavraChave(val, this.conj)
       .subscribe(response=>{
         this.items2 = response;
+      },
+      error=>{});
+  }
+
+}
+
+  //faz a busca conforme pesquisa da search-bar de Componentes
+  findComponentes (ev: any) {
+    this.inicializarItens();
+    const val = ev.target.value;
+  
+     // se o valor for uma string vazia não filtre os itens
+     if (val && val.trim() != '') {
+      this.componenteService.findComInConj(val, this.conj)
+      .subscribe(response=>{
+        this.items = response;
       },
       error=>{});
   }

@@ -41,7 +41,9 @@
 
 
    <ion-list inset>
-    <ion-item-divider color="light">COMPONENTES</ion-item-divider>
+    <ion-item-divider color="light">COMPONENTES
+      <ion-searchbar showCancelButton="always" (ionInput)="findComponentes(($event))"></ion-searchbar>
+    </ion-item-divider>
     <ion-item *ngFor="let item of items" (click)="controlador(item.codigoD)">
       <ion-card>
         <button ion-item>

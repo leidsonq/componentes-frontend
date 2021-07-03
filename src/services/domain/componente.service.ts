@@ -69,4 +69,12 @@ export class ComponenteService{
         return this.http.get<ComponenteDTO>(`${API_CONFIG.baseUrl}/componentes/codd?codigo=${codigo}`);
     }
 
+    findComInConj(palavra: string, conjunto_id: string) : Observable<ComponenteDTO[]>{
+        return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/componentes/buscar?inicio=${palavra}&id=${conjunto_id}`);
+    }
+
+    findComInSub (palavra: string, sub_conjunto_id: string) : Observable<ComponenteDTO[]>{
+        return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/componentes/sbuscar?inicio=${palavra}&id=${sub_conjunto_id}`);
+    }
+
 }
