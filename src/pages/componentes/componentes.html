@@ -19,7 +19,9 @@
 
 
    <ion-list inset>
-    <ion-item-divider color="light">SUBCONJUNTOS</ion-item-divider>
+    <ion-item-divider color="light">SUBCONJUNTOS
+      <ion-searchbar showCancelButton="always" (ionInput)="findSubConjunto(($event))"></ion-searchbar>
+    </ion-item-divider>
     <ion-item *ngFor="let item of items2" (click)="controladorSubConjunto(item.id)">
       <ion-card>
         <button ion-item>

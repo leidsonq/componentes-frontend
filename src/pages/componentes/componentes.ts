@@ -116,4 +116,33 @@ export class ComponentesPage {
     }
   }
 
+
+  inicializarItens(){
+    let conjunto_id = this.navParams.get('conjunto');
+    this.componenteService.findByConjunto (conjunto_id)
+      .subscribe (response => {
+        this.items = response  ['componentes'];
+        this.items2 = response  ['subConjunto'];
+        this.loadImagesUrls();
+      },
+      error =>{
+      });
+
+  }
+  //faz a busca conforme pesquisa da search-bar
+  findSubConjunto(ev: any) {
+    this.inicializarItens();
+    const val = ev.target.value;
+  
+     // se o valor for uma string vazia não filtre os itens
+     if (val && val.trim() != '') {
+      this.subConjuntoService.findByPalavraChave(val, this.conj)
+      .subscribe(response=>{
+        this.items2 = response;
+      },
+      error=>{});
+  }
+
+}
+
 }

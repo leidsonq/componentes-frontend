@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { API_CONFIG } from "../../config/api.config";
+import { ComponenteDTO } from "../../models/componente.dto";
 import { SubConjuntoDTO } from "../../models/subconjunto.dto";
 
 @Injectable()
@@ -31,6 +32,10 @@ export class SubConjuntoService{
     }
     delete(id: string): Observable<any> {
         return this.http.delete<any>(`${API_CONFIG.baseUrl}/subconjuntos/${id}`);
+    }
+
+    findByPalavraChave(palavra: string, conjunto_id: string) : Observable<ComponenteDTO[]>{
+        return this.http.get<ComponenteDTO[]>(`${API_CONFIG.baseUrl}/subconjuntos/buscar?inicio=${palavra}&id=${conjunto_id}`);
     }
 
 }
