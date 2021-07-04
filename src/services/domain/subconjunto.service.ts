@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs/Rx";
 import { API_CONFIG } from "../../config/api.config";
 import { ComponenteDTO } from "../../models/componente.dto";
 import { SubConjuntoDTO } from "../../models/subconjunto.dto";

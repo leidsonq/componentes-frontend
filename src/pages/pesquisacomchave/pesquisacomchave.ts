@@ -1,4 +1,3 @@
-import { calcProjectFileAndBasePath } from '@angular/compiler-cli';
 import { Component } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';

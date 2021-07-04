@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 
@@ -16,7 +16,7 @@ import { AuthIterceptorProvider } from '../interceptors/auth-interceptor';
 import { ConjuntoService } from '../services/domain/conjunto.service';
 import { ComponenteService } from '../services/domain/componente.service';
 import { SubConjuntoService } from '../services/domain/subconjunto.service';
-
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { SubConjuntoService } from '../services/domain/subconjunto.service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     CategoriaService,
     AuthIterceptorProvider,
     ErrorIterceptorProvider,
@@ -43,8 +42,8 @@ import { SubConjuntoService } from '../services/domain/subconjunto.service';
     UsuarioService,
     ConjuntoService,
     ComponenteService,
-    SubConjuntoService
-    
+    SubConjuntoService,
+    Camera,
   ]
 })
-export class AppModule {}
+export class AppModule{}

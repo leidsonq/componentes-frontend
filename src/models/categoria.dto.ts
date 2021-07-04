@@ -1,4 +1,3 @@
-import { ConjuntoDTO } from "./conjunto.dto";
 
 export interface CategoriaDTO {
     id: string;
