@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { API_CONFIG } from '../../config/api.config';
@@ -16,13 +17,16 @@ export class ProfilePage {
   usuario: UsuarioDTO;
   picture: string;
   cameraOn: boolean = false;
+  profileImage;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
     public usuarioService: UsuarioService,
-    public camera: Camera) {
+    public camera: Camera,
+    public sanitizer: DomSanitizer) {
+      this.profileImage = 'assets/imgs/avatar-blank.png';
   }
 
   ionViewDidLoad() {
@@ -52,10 +56,23 @@ export class ProfilePage {
     this.usuarioService.getImageFromBuket(this.usuario.id)
     .subscribe(response => {
       this.usuario.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.usuario.id}.jpg`;
+      this.blobToDataURL(response).then(dataUrl => {
+        let str : string = dataUrl as string;
+        this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str);
+      });
     },
     error => {
-      console.log("ERROR AO BUSCAR A IMGAEM NO S3");
+      this.profileImage = 'assets/imgs/avatar-blank.png';
     });
+  }
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+        let reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = (e) => fulfill(reader.result);
+        reader.readAsDataURL(blob);
+    })
   }
 
   getCameraPicture() {
@@ -101,7 +118,7 @@ export class ProfilePage {
     this.usuarioService.uploadPicture(this.picture)
       .subscribe (response=>{
         this.picture = null;
-        this.loadData();
+        this.getImageIfExists();
       },
       error =>{
       });
