@@ -120,8 +120,8 @@ export class NewSubconjuntoPage {
         }
       }
 
-      for (var i=0; i<this.itemsCom.length; i++ ){
-        if(this.itemsCom[i].codigoD == codigoD){
+      for (var j=0; j<this.itemsCom.length; j++ ){
+        if(this.itemsCom[j].codigoD == codigoD){
             this.exist = true;
             this.navCtrl.setRoot('ComponentesPage', {conjunto: conjunto_id});
             let alert = this.alertC.create({

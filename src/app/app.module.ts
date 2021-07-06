@@ -17,6 +17,7 @@ import { ConjuntoService } from '../services/domain/conjunto.service';
 import { ComponenteService } from '../services/domain/componente.service';
 import { SubConjuntoService } from '../services/domain/subconjunto.service';
 import { Camera } from '@ionic-native/camera';
+import { ImageUtilService } from '../services/image-util.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { Camera } from '@ionic-native/camera';
     ComponenteService,
     SubConjuntoService,
     Camera,
+    ImageUtilService
   ]
 })
 export class AppModule{}

@@ -26,6 +26,10 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+    this.loadData();
+  }
+
+  loadData(){
     let localUser = this.storage.getLocalUser();
     if(localUser && localUser.email){
       this.usuarioService.findByEmail(localUser.email)
@@ -43,6 +47,7 @@ export class ProfilePage {
       this.navCtrl.setRoot('HomePage');
     }
   }
+
   getImageIfExists(){
     this.usuarioService.getImageFromBuket(this.usuario.id)
     .subscribe(response => {
@@ -69,6 +74,20 @@ export class ProfilePage {
      this.cameraOn = false;
     }, (err) => {
     });
+  }
+
+  sendPicture(){
+    this.usuarioService.uploadPicture(this.picture)
+      .subscribe (response=>{
+        this.picture = null;
+        this.loadData();
+      },
+      error =>{
+      });
+  }
+
+  cancel(){
+    this.picture = null;
   }
 
 }

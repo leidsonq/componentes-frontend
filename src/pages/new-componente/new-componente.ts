@@ -79,8 +79,8 @@ export class NewComponentePage {
         }
   
         if(!this.exist){
-          for (var i=0; i<this.items.length; i++){
-            this.obj = this.items[i];
+          for (var j=0; j<this.items.length; j++){
+            this.obj = this.items[j];
   
           this.componente= {
             id: '',

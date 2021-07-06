@@ -27,7 +27,7 @@ export class CategoriasPage {
   }
 
   ionViewDidLoad() {
-      this.loadData();     
+      this.loadData();   
   }
 
   loadData(){
