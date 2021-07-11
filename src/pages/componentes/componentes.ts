@@ -42,6 +42,7 @@ export class ComponentesPage {
         this.items2 = response  ['subConjunto'];
         loader.dismiss();
         this.loadImagesUrls();
+         this.loadImagessSubUrls();
       },
       error =>{
         loader.dismiss();
@@ -52,12 +53,25 @@ export class ComponentesPage {
     this.navCtrl.push('SubcomponentesPage', {subconjunto: subconjunto_id});
   }
 
+  //Carrega as imagens miniatura dos componentes
   loadImagesUrls(){
     for (var i=0; i<this.items.length; i++){
       let item = this.items[i];
       this.componenteService.getSmallImageFromBucket(item.codigoD)
         .subscribe(response =>{
-          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}-small.jpg`     
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}.jpg`     
+        },
+        error =>{});
+    }
+  }
+
+  //carrega as imagens minatura dos subconjuntos
+  loadImagessSubUrls(){
+    for (var i=0; i<this.items2.length; i++){
+      let item = this.items2[i];
+      this.componenteService.getSmallImageFromBucket(item.codigoD)
+        .subscribe(response =>{
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}.jpg`     
         },
         error =>{});
     }
@@ -124,6 +138,7 @@ export class ComponentesPage {
         this.items = response  ['componentes'];
         this.items2 = response  ['subConjunto'];
         this.loadImagesUrls();
+        this.loadImagessSubUrls();
       },
       error =>{
       });
@@ -139,6 +154,7 @@ export class ComponentesPage {
       this.subConjuntoService.findByPalavraChave(val, this.conj)
       .subscribe(response=>{
         this.items2 = response;
+        this.loadImagessSubUrls();
       },
       error=>{});
   }
@@ -155,6 +171,7 @@ export class ComponentesPage {
       this.componenteService.findComInConj(val, this.conj)
       .subscribe(response=>{
         this.items = response;
+        this.loadImagesUrls();
       },
       error=>{});
   }

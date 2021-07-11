@@ -114,7 +114,7 @@ export class PesquisacomchavePage {
       let item = this.items[i];
       this.componenteService.getSmallImageFromBucket(item.codigoD)
         .subscribe(response =>{
-          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}-small.jpg`;
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}.jpg`;
         },
         error =>{});
     }

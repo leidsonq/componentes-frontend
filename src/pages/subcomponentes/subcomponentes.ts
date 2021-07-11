@@ -68,7 +68,7 @@ export class SubcomponentesPage {
       let item = this.items[i];
       this.componenteService.getSmallImageFromBucket(item.codigoD)
         .subscribe(response =>{
-          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}-small.jpg`     
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.codigoD}.jpg`     
         },
         error =>{});
     }
@@ -111,6 +111,7 @@ export class SubcomponentesPage {
       this.componenteService.findComInSub(val, this.subConj)
       .subscribe(response=>{
         this.items = response;
+        this.loadImagesUrls();
       },
       error=>{});
   }

@@ -63,7 +63,6 @@ export class ConjuntosPage {
 
   delete(id: string){
     this.conjuntoService.delete(id).subscribe (response =>{
-      console.log("Excluído com sucesso!")
     },
     error => {}); 
     this.controle= true;
