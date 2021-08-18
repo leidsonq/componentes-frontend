@@ -1,15 +1,28 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle> 
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><h5>Modelos de Máquinas</h5></ion-title>
-      <ion-searchbar showCancelButton="always" (ionInput)="findModelo(($event))"></ion-searchbar>
+    <div style="display:flex">
+      <ion-title>
+        <h5 *ngIf="!buscaAtiva"> Modelos de Máquinas</h5>
+      </ion-title>
+      <ion-searchbar *ngIf="buscaAtiva" showCancelButton="always" (ionInput)="findModelo(($event))"></ion-searchbar>
+      <button left edge ion-button color="light">
+        <ion-icon  name="search" color="primary" (click)="buscaOn()"></ion-icon>
+      </button>
+      <button left edge ion-button color="light">
+        <ion-icon  name="options" color="primary" (click)="itemSelect()"></ion-icon>
+      </button>
+    </div>
+    
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-fab top left edge>
-    <button navPush="NewModeloPage" ion-fab mini><ion-icon name="add"></ion-icon></button>
+  <ion-fab bottom right>
+    <button navPush="NewModeloPage" ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -20,23 +33,22 @@
       <ion-card>
         <button ion-item>
           <ion-thumbnail item-start>
-            <img src="assets/imgs/mci28.1.png"/>
+            <img src="assets/imgs/mci28.1.png" />
           </ion-thumbnail>
           <h2 text-left>{{item.fabricante}} {{item.modelo}}</h2>
         </button>
-        <button ion-button  color="light" (click)="enviaDecomposicao (item.id)">
-          <ion-icon name="send" color="primary"></ion-icon>  
+        <button *ngIf="itemSelecionado" ion-button color="light" (click)="enviaDecomposicao (item.id)">
+          <ion-icon name="send" color="primary"></ion-icon>
         </button>
-        <button ion-button  color="light">
-          <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>  
+        <button *ngIf="itemSelecionado" ion-button color="light">
+          <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>
         </button>
-        <button ion-button  color="light">
-          <ion-icon name="create" color="primary" (click)="editar(item.id)"></ion-icon>  
+        <button *ngIf="itemSelecionado" ion-button color="light">
+          <ion-icon name="create" color="primary" (click)="editar(item.id)"></ion-icon>
         </button>
-        
+
       </ion-card>
     </ion-item>
-    
+
   </ion-list>
 </ion-content>
-

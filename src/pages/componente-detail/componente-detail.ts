@@ -23,6 +23,7 @@ export class ComponenteDetailPage {
   componenteImage;
   componenteImageDetail;
   fileName: string;
+  itemSelecionado: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -187,6 +188,14 @@ export class ComponenteDetailPage {
     }
     if (tipo == 'D') {
       this.pictureDetails = null;
+    }
+
+  }
+  itemSelect() {
+    if (this.itemSelecionado == true) {
+      this.itemSelecionado = false;
+    } else {
+      this.itemSelecionado = true;
     }
 
   }

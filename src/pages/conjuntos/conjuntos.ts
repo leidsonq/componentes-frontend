@@ -14,6 +14,8 @@ export class ConjuntosPage {
   items: ConjuntoDTO[];
   mod: string;
   controle: boolean = false;
+  buscaAtiva: boolean = false;
+  itemSelecionado: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -104,5 +106,22 @@ export class ConjuntosPage {
   }
 
 }
+
+  buscaOn(){
+    if(this.buscaAtiva==true){
+      this.buscaAtiva = false;
+    } else{
+      this.buscaAtiva = true;
+    }
+  }
+
+  itemSelect() {
+    if (this.itemSelecionado == true) {
+      this.itemSelecionado = false;
+    } else {
+      this.itemSelecionado = true;
+    }
+
+  }
 
 }

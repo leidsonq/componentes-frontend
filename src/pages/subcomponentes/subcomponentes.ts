@@ -16,6 +16,8 @@ export class SubcomponentesPage {
   items: ComponenteDTO[];
   subConj: string;
   controle: boolean = false;
+  buscaAtiva: boolean = false;
+  itemSelecionado: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -114,7 +116,23 @@ export class SubcomponentesPage {
         this.loadImagesUrls();
       },
       error=>{});
+    }
   }
 
-}
+  buscaOn(){
+    if(this.buscaAtiva==true){
+      this.buscaAtiva = false;
+    } else{
+      this.buscaAtiva = true;
+    }
+  }
+
+  itemSelect() {
+    if (this.itemSelecionado == true) {
+      this.itemSelecionado = false;
+    } else {
+      this.itemSelecionado = true;
+    }
+
+  }
 }

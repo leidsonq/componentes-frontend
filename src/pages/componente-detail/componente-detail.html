@@ -1,11 +1,15 @@
 <ion-header>
 
   <ion-navbar>
-
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Detalhes do Componente</ion-title>
+    <div style="display:flex">
+       <ion-title>Detalhes do Componente</ion-title>
+       <button left edge ion-button color="light">
+        <ion-icon  name="options" color="primary" (click)="itemSelect()"></ion-icon>
+      </button>
+    </div>
   </ion-navbar>
 
 </ion-header>
@@ -20,9 +24,9 @@
       <ion-item *ngIf="picture">
         <img [src]="picture">
       </ion-item>
-      <ion-item>
-        <button ion-button block (click)="getCameraPicture('C')" [disabled]="cameraOn">Camera</button>
-        <button ion-button block (click)="getGalleryPicture('C')" [disabled]="cameraOn">Galeria</button>
+      <ion-item *ngIf="itemSelecionado">
+        <button  ion-button block (click)="getCameraPicture('C')" [disabled]="cameraOn">Camera</button>
+        <button  ion-button block (click)="getGalleryPicture('C')" [disabled]="cameraOn">Galeria</button>
         <button *ngIf="picture" ion-button outline block (click)="sendPicture('C')">Enviar Imagem</button>
         <button *ngIf="picture" ion-button outline block (click)="cancel('C')">Descartar Imagem</button>
       </ion-item>
@@ -38,9 +42,9 @@
       <ion-item *ngIf="pictureDetails">
         <img [src]="pictureDetails">
       </ion-item>
-      <ion-item>
-        <button ion-button block (click)="getCameraPicture('D')" [disabled]="cameraOn">Camera</button>
-        <button ion-button block (click)="getGalleryPicture('D')" [disabled]="cameraOn">Galeria</button>
+      <ion-item *ngIf="itemSelecionado">
+        <button  ion-button block (click)="getCameraPicture('D')" [disabled]="cameraOn">Camera</button>
+        <button  ion-button block (click)="getGalleryPicture('D')" [disabled]="cameraOn">Galeria</button>
         <button *ngIf="pictureDetails" ion-button outline block (click)="sendPicture('D')">Enviar Imagem</button>
         <button *ngIf="pictureDetails" ion-button outline block (click)="cancel('D')">Descartar Imagem</button>
       </ion-item>

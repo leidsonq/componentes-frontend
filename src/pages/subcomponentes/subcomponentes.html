@@ -4,13 +4,22 @@
     <button ion-button menuToggle> 
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Componentes</ion-title>
-    <ion-searchbar showCancelButton="always" (ionInput)="findComponentes(($event))"></ion-searchbar>
+    <div style="display:flex">
+      <ion-title *ngIf="!buscaAtiva">Componentes</ion-title>
+      <ion-searchbar *ngIf="buscaAtiva" showCancelButton="always" (ionInput)="findComponentes(($event))"></ion-searchbar>
+      <button left edge ion-button color="light">
+        <ion-icon  name="search" color="primary" (click)="buscaOn()"></ion-icon>
+      </button>
+      <button left edge ion-button color="light">
+        <ion-icon  name="options" color="primary" (click)="itemSelect()"></ion-icon>
+      </button>
+    </div>
+    
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-fab top left edge>
+  <ion-fab bottom right>
     <button (click)="insertNewComponente()" ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -28,7 +37,7 @@
           <h2>{{item.codigoD}}</h2>
           <p style="font-size: 10px">{{item.descricao}}</p>
         </button>
-        <button ion-button  color="light">
+        <button *ngIf="itemSelecionado" ion-button  color="light">
           <ion-icon name="trash" color="primary" (click)="delete(item.id)"></ion-icon>  
         </button>
       </ion-card>

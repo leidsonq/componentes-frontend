@@ -16,56 +16,58 @@ export class CategoriasPage {
   bucketUrl: string = API_CONFIG.bucketBaseUrl;
   items: CategoriaDTO[];
   controle: boolean = false;
+  buscaAtiva: boolean = false;
+  itemSelecionado: boolean = false;
 
   constructor(
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public categoriaService: CategoriaService,
     public storage: StorageService,
-    public loadingCtrl: LoadingController) {   
-      
+    public loadingCtrl: LoadingController) {
+
   }
 
   ionViewDidLoad() {
-      this.loadData();   
+    this.loadData();
   }
 
-  loadData(){
+  loadData() {
     let loader = this.presentLoading();
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
       loader.dismiss();
 
     },
-    error => {
-      loader.dismiss();
-    });
+      error => {
+        loader.dismiss();
+      });
   }
 
   //direciona para a pag de conjuntos passando o id o modelo selecionado
-  showConjuntos (modelo_id: string) {
-    this.navCtrl.push('ConjuntosPage', {modelo: modelo_id});
+  showConjuntos(modelo_id: string) {
+    this.navCtrl.push('ConjuntosPage', { modelo: modelo_id });
   }
 
   //envia a decomposicao por email em forma de string
-  enviaDecomposicao (id: string){
+  enviaDecomposicao(id: string) {
     let localUser = this.storage.getLocalUser();
-    this.categoriaService.sendDecomposicao(id, localUser.email).subscribe (response =>{
+    this.categoriaService.sendDecomposicao(id, localUser.email).subscribe(response => {
       console.log("Enviado com sucesso!")
     },
-    error => {}); 
-    this.controle= true;
+      error => { });
+    this.controle = true;
     this.navCtrl.push('CategoriasPage');
   }
   //envia as estratégicas por email em forma de string
-  enviaEstrategicas (id: string){
+  enviaEstrategicas(id: string) {
     let localUser = this.storage.getLocalUser();
-    this.categoriaService.sendEstrategicas(id, localUser.email).subscribe (response =>{
+    this.categoriaService.sendEstrategicas(id, localUser.email).subscribe(response => {
       console.log("Enviado com sucesso!")
     },
-    error => {}); 
+      error => { });
   }
-  
+
   presentLoading() {
     let loader = this.loadingCtrl.create({
       content: "Aguarde..."
@@ -80,31 +82,31 @@ export class CategoriasPage {
     }, 1000);
   }
 
-  controlador(item_id: string){
-    if(this.controle==false){
+  controlador(item_id: string) {
+    if (this.controle == false) {
       this.showConjuntos(item_id);
     }
   }
 
-  delete (id: string){
-    this.categoriaService.delete(id).subscribe (response =>{
+  delete(id: string) {
+    this.categoriaService.delete(id).subscribe(response => {
       console.log("Excluído com sucesso!")
     },
-    error => {}); 
-    this.controle= true;
+      error => { });
+    this.controle = true;
     this.navCtrl.push('CategoriasPage');
   }
 
-  editar(id: string){
-    this.controle= true;
-    this.navCtrl.push('NewModeloPage', {modelo: id, tipo: 2});
+  editar(id: string) {
+    this.controle = true;
+    this.navCtrl.push('NewModeloPage', { modelo: id, tipo: 2 });
   }
 
-  inicializarItens(){
+  inicializarItens() {
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
     },
-    error => {});
+      error => { });
   }
   //faz a busca conforme pesquisa da search-bar
   findModelo(ev: any) {
@@ -113,15 +115,32 @@ export class CategoriasPage {
 
     // se o valor for uma string vazia não filtre os itens
     if (val && val.trim() != '') {
-        this.categoriaService.findBySubStartWith(val)
-        .subscribe(response=>{
+      this.categoriaService.findBySubStartWith(val)
+        .subscribe(response => {
           this.items = response;
         },
-        error=>{});
+          error => { });
+    }
+
+  }
+
+  buscaOn() {
+    if (this.buscaAtiva == true) {
+      this.buscaAtiva = false;
+    } else {
+      this.buscaAtiva = true;
+    }
+
+  }
+
+  itemSelect() {
+    if (this.itemSelecionado == true) {
+      this.itemSelecionado = false;
+    } else {
+      this.itemSelecionado = true;
     }
 
   }
 
 
-  
 }

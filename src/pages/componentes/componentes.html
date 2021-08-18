@@ -4,24 +4,28 @@
     <button ion-button menuToggle> 
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Componentes/Subconjuntos</ion-title>
+    <div style="display:flex">
+      <ion-title *ngIf="!buscaAtiva">Componentes/Subconjuntos</ion-title>
+      <ion-searchbar *ngIf="buscaAtiva" showCancelButton="always" (ionInput)="[findSubConjunto(($event)), findComponentes(($event))]"></ion-searchbar>
+      <button left edge ion-button color="light">
+        <ion-icon  name="search" color="primary" (click)="buscaOn()"></ion-icon>
+      </button>
+      <button left edge ion-button color="light">
+        <ion-icon  name="options" color="primary" (click)="itemSelect()"></ion-icon>
+      </button>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-fab top right edge>
+  <ion-fab bottom right>
     <button (click)="insertNewComponente()" ion-fab mini><ion-icon name="add"></ion-icon></button>
   </ion-fab>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-
-
    <ion-list inset>
-    <ion-item-divider color="light">SUBCONJUNTOS
-      <ion-searchbar showCancelButton="always" (ionInput)="findSubConjunto(($event))"></ion-searchbar>
-    </ion-item-divider>
     <ion-item *ngFor="let item of items2" (click)="controladorSubConjunto(item.id)">
       <ion-card>
         <button ion-item>
@@ -32,7 +36,7 @@
           <h2>{{item.codigoD}}</h2>
           <p style="font-size: 10px">{{item.descricao}}</p>
         </button>
-        <button ion-button  color="light">
+        <button *ngIf="itemSelecionado" ion-button  color="light">
           <ion-icon name="trash" color="primary" (click)="deleteSubConjunto(item.id)"></ion-icon>  
         </button>
       </ion-card>
@@ -41,9 +45,6 @@
 
 
    <ion-list inset>
-    <ion-item-divider color="light">COMPONENTES
-      <ion-searchbar showCancelButton="always" (ionInput)="findComponentes(($event))"></ion-searchbar>
-    </ion-item-divider>
     <ion-item *ngFor="let item of items" (click)="controlador(item.codigoD)">
       <ion-card>
         <button ion-item>
@@ -54,7 +55,7 @@
           <h2>{{item.codigoD}}</h2>
           <p style="font-size: 10px">{{item.descricao}}</p>
         </button>
-        <button ion-button  color="light">
+        <button *ngIf="itemSelecionado" ion-button  color="light">
           <ion-icon name="trash" color="primary" (click)="deleteComponente(item.id)"></ion-icon>  
         </button>
       </ion-card>
