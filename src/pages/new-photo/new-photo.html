@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Criar nova imagem</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+    </ion-card-header>
+    <ion-card>
+      <ion-item *ngIf="picture">
+        <img [src]="picture">
+      </ion-item>
+      <ion-item >
+        <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
+        <button ion-button block (click)="getGalleryPicture()" [disabled]="cameraOn">Galeria</button>
+        <button *ngIf="picture" ion-button outline block (click)="sendPicture()">Enviar Imagem</button>
+        <button *ngIf="picture" ion-button outline block (click)="cancel()">Descartar Imagem</button>
+      </ion-item>
+    </ion-card>
+  </ion-card>
+
+</ion-content>

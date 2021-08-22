@@ -33,7 +33,7 @@
       <ion-card>
         <button ion-item>
           <ion-thumbnail item-start>
-            <img src="assets/imgs/mci28.1.png" />
+            <img [src]="item.imageUrl || 'assets/imgs/prod.jpg'">
           </ion-thumbnail>
           <h2 text-left>{{item.fabricante}} {{item.modelo}}</h2>
         </button>
@@ -45,6 +45,9 @@
         </button>
         <button *ngIf="itemSelecionado" ion-button color="light">
           <ion-icon name="create" color="primary" (click)="editar(item.id)"></ion-icon>
+        </button>
+        <button *ngIf="itemSelecionado" ion-button color="light">
+          <ion-icon name="camera" color="primary" (click)="editarFoto(item.id)"></ion-icon>
         </button>
 
       </ion-card>

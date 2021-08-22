@@ -5,6 +5,8 @@ import { CategoriaDTO } from '../../models/categoria.dto';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { StorageService } from '../../services/storage.service';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { ComponenteService } from '../../services/domain/componente.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @IonicPage()
 @Component({
@@ -18,13 +20,18 @@ export class CategoriasPage {
   controle: boolean = false;
   buscaAtiva: boolean = false;
   itemSelecionado: boolean = false;
+  modeloImagem;
+  
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public categoriaService: CategoriaService,
     public storage: StorageService,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public componenteService: ComponenteService,
+    public sanitizer: DomSanitizer) {
+      this.modeloImagem = 'assets/imgs/prod.jpg';
 
   }
 
@@ -36,8 +43,8 @@ export class CategoriasPage {
     let loader = this.presentLoading();
     this.categoriaService.findAll().subscribe(response => {
       this.items = response;
+      this.getImageUrlIfExists();
       loader.dismiss();
-
     },
       error => {
         loader.dismiss();
@@ -142,5 +149,27 @@ export class CategoriasPage {
 
   }
 
+  //direciona para a pagina de tirar foto de modelo de maquina
+  editarFoto(id: string){
+    this.categoriaService.findById(id)
+    .subscribe (response =>{
+      let nome = response.modelo;
+      this.navCtrl.push('NewPhotoPage', { nome: nome, page: 'CategoriasPage'});
+    })
+  }
+
+  //busca a imagem no S3 caso ela exista
+  getImageUrlIfExists() {
+    for (var i=0; i<this.items.length; i++){
+      let item = this.items[i];
+      this.componenteService.getImageFromBucket(item.modelo)
+        .subscribe(response =>{ 
+          item.imageUrl = `${API_CONFIG.bucketBaseUrl}/${item.modelo}.jpg`   
+        },
+        error =>{
+        
+        });
+    }
+  }
 
 }

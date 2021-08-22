@@ -200,4 +200,26 @@ export class ComponenteDetailPage {
 
   }
 
+  //direciona para a pagina de tirar foto de modelo de maquina
+  editarFoto(tipo: string) {
+    let componente_id = this.navParams.get('componente_id');
+    this.componenteService.findByCodigoD(componente_id)
+      .subscribe(response => {
+        let componente = response;
+        if (tipo == 'C') {
+          let nomeImage = componente.codigoD;
+          this.pictureSend = this.picture;
+          this.navCtrl.push('NewPhotoPage', { nome: nomeImage, page: 'ComponenteDetailPage', componente: componente_id });
+        }
+        if (tipo == 'D') {
+          let nome = componente.codigoD + '-details';
+          this.pictureSend = this.pictureDetails;
+          this.navCtrl.push('NewPhotoPage', { nome: nome, page: 'ComponenteDetailPage', componente_id: componente_id });
+        }
+      },
+      (error =>{
+
+      }));
+  }
+
 }
